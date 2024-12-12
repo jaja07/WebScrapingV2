@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  flask:
+    build: ./flask
+    container_name: flask
+    ports:
+      - "8080:5000"
+    networks:
+      - webscrapingV2
+
+
+  scraper:
+    build: ./scraper
+    container_name: scraper
+    networks:
+      - webscrapingV2
+
+
+  mongoServer:
+    image: mongodb/mongodb-community-server:6.0-ubi8
+    container_name: mongo-server
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    volumes:
+      - type: bind
+        source: ./data
+        target: /data/db
+
+
+networks:
+  webscrapingV2:
