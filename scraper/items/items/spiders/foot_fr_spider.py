@@ -27,10 +27,10 @@ class FootFrSpiderSpider(scrapy.Spider):
         
         article = ItemsItem()
         article['nom'] = response.xpath('//h1[@class="c-pdt__title"]/text()').get()
-        if response.xpath('//h1[@class="c-pdt__title"]/text()').get():
+        if response.xpath('//span[@class="c-price--lg--discount u-mr-2"]/text()').get():
             article['prix'] = response.xpath('//span[@class="c-price--lg--discount u-mr-2"]/text()').get().strip()
         else:
-            article['prix'] = response.xpath('//span[@class="c-price--lg--old u-mr-2"]/text()').get().strip()
+            article['prix'] = response.xpath('//span[@class="c-price--lg u-mr-2"]').get().strip()
         #item['prix'] = response.xpath('//p[@class="product-price__content c-text c-text--size-m c-text--style-subtitle c-text--bold c-text--spacing-default"]/text()').get()+response.xpath('//p[@class="product-price__content c-text c-text--size-s c-text--style-p c-text--bold c-text--spacing-default"]/text()').get()
         #item['description'] = response.xpath('//div[@class="product-content__content c-text c-text--size-s c-text--style-p c-text--spacing-default"]/div/text()').get()
         article['lien'] = response.url
