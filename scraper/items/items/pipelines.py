@@ -24,8 +24,8 @@ class MongoDBPipeline:
         self.mongo_uri = mongo_uri
         self.mongo_db = mongo_db
 
-    @classmethod
-    def from_crawler(cls, crawler):
+    """@classmethod
+     def from_crawler(cls, crawler):
         return cls(
             mongo_uri=crawler.settings.get("MONGO_URI"),
             mongo_db=crawler.settings.get("MONGO_DATABASE")
@@ -39,5 +39,9 @@ class MongoDBPipeline:
         self.client.close()
 
     def process_item(self, item, spider):
+<<<<<<< HEAD
         self.db["scraping_db"].insert_one(dict(item))
+=======
+        self.db["scraped_data"].insert_one(dict(item))
+>>>>>>> 9456e957a6660ca11eceb45aec8fc4438d7e3c0f
         return item """
