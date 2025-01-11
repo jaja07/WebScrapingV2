@@ -10,7 +10,8 @@
 		"ghcr.io/devcontainers-extra/features/apt-get-packages:1": {},
 		"ghcr.io/devcontainers-extra/features/autoenv:1": {},
 		"ghcr.io/devcontainers-extra/features/bash-command:1": {},
-		"ghcr.io/devcontainers-extra/features/mongosh-homebrew:1": {}
+		"ghcr.io/devcontainers-extra/features/mongosh-homebrew:1": {},
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
 	}
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
