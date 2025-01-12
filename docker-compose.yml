@@ -15,7 +15,11 @@ services:
     container_name: scraper
     networks:
       - webscrapingV2
-
+    depends_on:
+      - mongoServer
+    environment:
+      - MONGO_URI=mongodb://root:pass@mongoServer:27017
+      - MONGO_DATABASE=scraping_db
 
   mongoServer:
     image: mongodb/mongodb-community-server:6.0-ubi8
@@ -27,7 +31,6 @@ services:
       - MONGODB_INITDB_ROOT_PASSWORD=pass
     volumes:
       - ./data:/data/db
-
 
 
 networks:
