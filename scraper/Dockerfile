@@ -15,6 +15,9 @@ RUN apt install wait-for-it
 # Copiez le reste des fichiers de l'application dans le conteneur
 COPY . /scraper
 
+# Changez le répertoire de travail pour pointer directement sur le dossier items
+WORKDIR /scraper/items
+
 # Définissez la commande par défaut pour exécuter le scraper
-# CMD ["python", ""]
+CMD ["scrapy", "crawl", "foot_fr_spider"]
 
