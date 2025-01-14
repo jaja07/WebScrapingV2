@@ -12,6 +12,13 @@ class ItemsPipeline:
     def process_item(self, item, spider):
         return item
 
+class ExtractionAnneePipeline:
+    def process_item(self, item, spider):
+        annee = item['prix'].split()
+        item['annee'] = annee[-1]
+        return item
+
+
 class MongoDBPipeline:
     def __init__(self, mongo_uri, mongo_db):
         self.mongo_uri = mongo_uri
@@ -32,5 +39,5 @@ class MongoDBPipeline:
         self.client.close()
 
     def process_item(self, item, spider):
-        self.db["scraped_data"].insert_one(dict(item))
-        return item """
+        self.db["scraping_db"].insert_one(dict(item))
+        return item

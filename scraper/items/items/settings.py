@@ -12,11 +12,9 @@ BOT_NAME = "items"
 SPIDER_MODULES = ["items.spiders"]
 NEWSPIDER_MODULE = "items.spiders"
 
-MONGO_URI = "mongodb://database:27017"
+MONGO_URI = "mongodb://root:pass@mongoServer:27017"
 MONGO_DATABASE = "scraping_db"
-ITEM_PIPELINES = {
-    "items.pipelines.MongoDBPipeline": 300,
-}
+
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = "items (+http://www.yourdomain.com)"
