@@ -65,9 +65,10 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    "items.pipelines.ItemsPipeline": 300,
-#}
+ITEM_PIPELINES = {
+    "items.pipelines.ItemsPipeline": 300,
+    "items.pipelines.MongoDBPipeline": 400,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
