@@ -14,8 +14,16 @@ class ItemsPipeline:
 
 class ExtractionAnneePipeline:
     def process_item(self, item, spider):
-        annee = item['prix'].split()
-        item['annee'] = annee[-1]
+        
+        """ if spider.name == "foot_fr_spider" or spider.name =='unisportspider':
+            annee = item['nom'].split()
+            item['annee'] = annee[-1]
+            
+        else: """
+        annee = item['nom'].split()
+        for chaine in annee:
+            if chaine.startswith('20'):
+                item['annee'] = chaine
         return item
 
 
@@ -31,7 +39,7 @@ class MongoDBPipeline:
             mongo_db=crawler.settings.get("MONGO_DATABASE")
         )
 
-    """ def open_spider(self, spider):
+    def open_spider(self, spider):
         self.client = pymongo.MongoClient(self.mongo_uri)
         self.db = self.client[self.mongo_db]
 
@@ -41,3 +49,5 @@ class MongoDBPipeline:
     def process_item(self, item, spider):
         self.db["scraping_db"].insert_one(dict(item))
         return item
+    
+    
