@@ -12,7 +12,7 @@ BOT_NAME = "items"
 SPIDER_MODULES = ["items.spiders"]
 NEWSPIDER_MODULE = "items.spiders"
 
-MONGO_URI = "mongodb://root:pass@mongoServer:27017"
+MONGO_URI = "mongodb://root:pass@localhost:27017/scraping?authSource=root"
 MONGO_DATABASE = "scraping_db"
 
 
