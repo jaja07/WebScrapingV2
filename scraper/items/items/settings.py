@@ -67,7 +67,8 @@ ROBOTSTXT_OBEY = True
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     "items.pipelines.ItemsPipeline": 300,
-    "items.pipelines.MongoDBPipeline": 400,
+    "items.pipelines.ExtractionAnneePipeline": 400,
+    "items.pipelines.MongoDBPipeline":500,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
