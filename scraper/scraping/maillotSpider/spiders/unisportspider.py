@@ -19,4 +19,5 @@ class UnisportspiderSpider(scrapy.Spider):
         if response.xpath('//span[@class="font-semibold"]/text()').get():
             article['prix'] = response.xpath('//span[@class="font-semibold"]/text()').get().strip()
         article['lien'] = response.url
+        article['sites'] = 'unisportstore.fr'
         yield article

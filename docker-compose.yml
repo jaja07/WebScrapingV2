@@ -6,42 +6,36 @@ services:
     container_name: flask
     ports:
       - "8080:5000"
-
+    networks:
+      - webscrapingV2
 
   scraper:
     build: ./scraper
     container_name: scraper
     depends_on:
-      - mongoServer
-    environment:
-      #- MONGO_URI=mongodb://root:pass@mongoServer:27017/scraping_db
+      - mysqlServer
+    command: ["wait-for-it", "mysqlServer:3306", "--timeout=120", "--", "python", "spidersCrawling.py"]
+    restart: on-failure
+    networks:
+      - webscrapingV2
 
-  mongoServer:
-    image: mongodb/mongodb-community-server:6.0-ubi8
-    container_name: mongo-server
-    ports:
-      - "27017:27017"
-    env_file:
-      - ./.env
+
+  mysqlServer:
+    image: mysql
+    container_name: mysqlServer
+    command: ["--init-file=/tmp/mysql-init.sql"]
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
-      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_ROOT_HOST: '%'
     volumes:
-      - ./data:/data/db
-
-  mongo-express:
-    image: mongo-express
-    container_name: mongo-express
+      - ./db/db_dir:/var/lib/mysql
+      - ./db/mysql-init.sql:/tmp/mysql-init.sql
+    networks:
+      - webscrapingV2
     ports:
-      - "8081:8081"
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_INITDB_ROOT_USERNAME}
-      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
-      ME_CONFIG_MONGODB_SERVER: mongoServer
-      ME_CONFIG_MONGODB_PORT: "27017"
-    depends_on:
-      - mongoServer
+      - "3307:3306"
+    expose:
+      - 3306
 
 networks:
   webscrapingV2:

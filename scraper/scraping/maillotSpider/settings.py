@@ -7,14 +7,19 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = "items"
+BOT_NAME = "maillotSpider"
 
-SPIDER_MODULES = ["items.spiders"]
-NEWSPIDER_MODULE = "items.spiders"
+SPIDER_MODULES = ["maillotSpider.spiders"]
+NEWSPIDER_MODULE = "maillotSpider.spiders"
 
-MONGO_URI = "mongodb://root:pass@localhost:27017/scraping?authSource=root"
-MONGO_DATABASE = "scraping_db"
+""" MONGO_URI = "mongodb://root:pass@mongoServer:27017/scraping?authSource=root"
+MONGO_DATABASE = "scraping_db" """
 
+MYSQL_PASS = 'root'
+MYSQL_USER = 'root'
+MYSQL_DB = 'scrapingdb'
+MYSQL_HOST = 'mysqlServer'
+MYSQL_PORT = 3306
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = "items (+http://www.yourdomain.com)"
@@ -66,9 +71,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    "items.pipelines.ItemsPipeline": 300,
-    "items.pipelines.ExtractionAnneePipeline": 400,
-    "items.pipelines.MongoDBPipeline":500,
+    "maillotSpider.pipelines.MySQLPipeline":300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
