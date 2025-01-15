@@ -9,29 +9,34 @@ services:
     networks:
       - webscrapingV2
 
-
   scraper:
     build: ./scraper
     container_name: scraper
+    depends_on:
+      - mysqlServer
+    command: ["wait-for-it", "mysqlServer:3306", "--timeout=120", "--", "python", "spidersCrawling.py"]
+    restart: on-failure
     networks:
       - webscrapingV2
-    depends_on:
-      - mongoServer
-    environment:
-      - MONGO_URI=mongodb://root:pass@mongoServer:27017
-      - MONGO_DATABASE=scraping_db
 
-  mongoServer:
-    image: mongodb/mongodb-community-server:6.0-ubi8
-    container_name: mongo-server
-    ports:
-      - "27017:27017"
+
+  mysqlServer:
+    image: mysql
+    container_name: mysqlServer
+    command: ["--init-file=/tmp/mysql-init.sql"]
     environment:
-      - MONGODB_INITDB_ROOT_USERNAME=root
-      - MONGODB_INITDB_ROOT_PASSWORD=pass
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_ROOT_HOST: '%'
     volumes:
-      - ./data:/data/db
-
+      - ./db/db_dir:/var/lib/mysql
+      - ./db/mysql-init.sql:/tmp/mysql-init.sql
+    networks:
+      - webscrapingV2
+    ports:
+      - "3307:3306"
+    expose:
+      - 3306
 
 networks:
   webscrapingV2:
+    driver: bridge

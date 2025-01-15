@@ -15,6 +15,7 @@ class NikespiderSpider(scrapy.Spider):
             maillot['lien'] = j.xpath('./div/figure/a[@class="product-card__link-overlay"]/@href').get()
             maillot['nom'] = j.xpath('./div/figure/div/div/div[@class="product-card__titles"]/div[@class="product-card__title"]/text()').get()
             maillot['prix'] = j.xpath('./div/figure/div/div[@class="product-card__animation_wrapper"]/div/div/div/div[contains(@class, "is--current-price css")]/text()').get()
+            maillot['sites'] = 'nike.com'
             yield maillot
 
         

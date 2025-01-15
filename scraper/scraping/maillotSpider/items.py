@@ -13,4 +13,5 @@ class ItemsItem(scrapy.Item):
     prix = scrapy.Field()
     lien = scrapy.Field()
     annee = scrapy.Field()
-    pass
+    sites = scrapy.Field()
+    

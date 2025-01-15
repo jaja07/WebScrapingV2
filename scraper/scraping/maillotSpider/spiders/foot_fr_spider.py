@@ -34,4 +34,5 @@ class FootFrSpiderSpider(scrapy.Spider):
         #item['prix'] = response.xpath('//p[@class="product-price__content c-text c-text--size-m c-text--style-subtitle c-text--bold c-text--spacing-default"]/text()').get()+response.xpath('//p[@class="product-price__content c-text c-text--size-s c-text--style-p c-text--bold c-text--spacing-default"]/text()').get()
         #item['description'] = response.xpath('//div[@class="product-content__content c-text c-text--size-s c-text--style-p c-text--spacing-default"]/div/text()').get()
         article['lien'] = response.url
+        article['sites'] = 'foot.fr'
         yield article
