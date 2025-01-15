@@ -35,4 +35,5 @@ class FootFrSpiderSpider(scrapy.Spider):
         #item['description'] = response.xpath('//div[@class="product-content__content c-text c-text--size-s c-text--style-p c-text--spacing-default"]/div/text()').get()
         article['lien'] = response.url
         article['sites'] = 'foot.fr'
+        article['img']=response.xpath('//div[@class="c-pdt-thumb__list c-snap /js slider-container js-lightgallery-pdt-list"]/div/picture/img/@src').get().strip()
         yield article

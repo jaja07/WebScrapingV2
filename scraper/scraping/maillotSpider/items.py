@@ -13,5 +13,6 @@ class ItemsItem(scrapy.Item):
     prix = scrapy.Field()
     lien = scrapy.Field()
     annee = scrapy.Field()
+    img=scrapy.Field()
     sites = scrapy.Field()
     

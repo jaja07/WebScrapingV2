@@ -92,7 +92,7 @@ class MySQLPipeline:
 
     def _insert_record(self, tx, item):
         # Ajoutez ici les champs correspondants à votre item
-        fields = ['nom', 'prix','lien','annee','sites']
+        fields = ['nom', 'prix','lien','annee','sites', 'img']
         # ... dans votre méthode _insert_record ...
         values = [str(item.get(field)) for field in fields]
         # Prenez le premier élément de chaque liste
