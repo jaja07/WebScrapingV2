@@ -101,7 +101,7 @@ class MySQLPipeline:
             """ INSERT IGNORE INTO maillots ({}) VALUES ({}) """\
             .format(','.join(fields), ','.join(values))
         )
-        print("MYSQL: ", result)
+        #print("MYSQL: ", result)
         if result > 0:
             self.stats.inc_value('database/items_added')
    
