@@ -10,6 +10,7 @@ CREATE TABLE maillots (
     lien VARCHAR(255) NOT NULL,
     annee VARCHAR(255) NOT NULL,
     sites VARCHAR(20),
+    img VARCHAR(255),
     CONSTRAINT PK_maillots PRIMARY KEY(id)
 );
  
