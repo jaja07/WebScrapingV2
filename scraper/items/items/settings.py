@@ -7,10 +7,10 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = "items"
+BOT_NAME = "items_folder"
 
-SPIDER_MODULES = ["items.spiders"]
-NEWSPIDER_MODULE = "items.spiders"
+SPIDER_MODULES = ["items_folder.spiders"]
+NEWSPIDER_MODULE = "items_folder.spiders"
 
 MONGO_URI = "mongodb://root:pass@mongoServer:27017"
 MONGO_DATABASE = "scraping_db"
