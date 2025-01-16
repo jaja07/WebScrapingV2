@@ -16,8 +16,12 @@ class UnisportspiderSpider(scrapy.Spider):
     def parse_maillots(self, response):
         article = ItemsItem()
         article['nom'] = response.xpath('//div[@class="p-4 lg:col-span-2 lg:px-0 lg:py-12"]/h1/text()').get()
-        if response.xpath('//span[@class="font-semibold"]/text()').get():
-            article['prix'] = response.xpath('//span[@class="font-semibold"]/text()').get().strip()
+        if response.xpath('//span[@class="font-semibold"]/text()[3]').get():
+            article['prix'] = response.xpath('//span[@class="font-semibold"]/text()[3]').get()
+        else:
+            article['prix'] = response.xpath('//span[@class="font-semibold"]/text()').get()
+
+
         article['lien'] = response.url
         article['sites'] = 'unisportstore.fr'
         article['img']= response.xpath('//div[@class="aspect-h-1 aspect-w-1"]/img/@src').get()

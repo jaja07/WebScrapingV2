@@ -66,8 +66,7 @@ class MySQLPipeline:
         # df.to_csv('output.csv', index=False)
 
     def process_item(self, item, spider):
-        
-        # Supprimez l'espace insécable, le symbole euro, et remplacez la virgule par un point.
+
         price_str = item['prix']
         if isinstance(price_str, list):
             price_str = price_str[0]  # Si la liste est vide, cela lèvera une erreur.

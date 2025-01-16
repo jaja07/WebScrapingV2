@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Prix iPhone</title>
+    <title>Maillots</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
@@ -19,7 +19,20 @@ body {
     color: var(--text-color);
     font-family: 'Arial', sans-serif;
 }
+#container-cards {
+    margin-top: 2rem;
+}
 
+nav {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 3.5rem;
+}
 .navbar {
     background-color: var(--primary-color) !important;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -76,11 +89,9 @@ body {
                 <a class="navbar-brand" href="/">Maillots de Foot</a>
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/nike_page">NIKE</a>
-                            <a class="nav-link" href="/foot_fr_page">FOOT FR</a>
-                            <a class="nav-link" href="/uni_page">UNISPORT</a>
-                        </li>
+                        <li><a class="nav-link" href="/nike_page">NIKE</a></li>
+                        <li><a class="nav-link" href="/foot_fr_page">FOOT FR</a></li>
+                        <li><a class="nav-link" href="/uni_page">UNISPORT</a></li>
                     </ul>
                 </div>
             </div>
@@ -89,7 +100,7 @@ body {
     </header>
     
     <!-- Container for product cards -->
-    <div class="container">
+    <div class="container" id="container-cards">
         <div class="row" id="products-container">
             <!-- Product cards will be inserted here -->
         </div>
@@ -120,7 +131,6 @@ body {
                     return ascending ? priceA - priceB : priceB - priceA;
                 });
             }
-
             // Charger et mélanger les données
             $.ajax({
                 url: '/uni',
@@ -138,9 +148,9 @@ body {
             function insertDataIntoDOM(data) {
                 $('#products-container').empty(); // Vider le container avant d'ajouter les nouveaux éléments
                 data.forEach(function(product) {
-                    var cardHtml = '<div class="col-md-4">' +
-                                        '<div class="card" style="width: 18rem;">' +
-                                           
+                    var cardHtml = '<div class="col-md-4 mb-3 mt-5">' +
+                                        '<div class="card h-100" style="width: 18rem; margin: 10px;">' +
+                                            '<img src="' + product.img + '" class="card-img-top mx-auto d-block" style="max-width:80px; height:auto;" alt="Product Image">' +
                                             '<div class="card-body">' +
                                                 '<a href="' + product.lien + '" class="btn btn-primary view-button">Voir</a>' +
                                                 '<p class="card-text"><small class="text-muted">Vendeur: ' + product.sites + '</small></p>' +
@@ -151,39 +161,8 @@ body {
                                       '</div>';
                     $('#products-container').append(cardHtml);
                 });
-            }
-
-           
-
-           
+            }          
         });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            for (let i = 0; i < 200; i++) {
-                createConfetti();
-            }
-        });
-
-        function createConfetti() {
-            const confetti = document.createElement('div');
-            confetti.classList.add('confetti');
-            confetti.style.setProperty('--color', getRandomColor());
-            confetti.style.setProperty('--x', `${(Math.random() - 0.5) * 5000}px`);
-            confetti.style.setProperty('--y', `${(Math.random() - 0.5) * 5000}px`);
-            confetti.style.setProperty('--rotate', `${Math.random() * 360}deg`);
-            confetti.style.setProperty('--scale', `${Math.random() * 0.5 + 0.5}`);
-            document.body.appendChild(confetti);
-            setTimeout(() => confetti.remove(), 1500);
-        }
-
-        function getRandomColor() {
-            const colors = ['#ff0', '#f0f', '#0ff', '#f00', '#0f0', '#00f', '#ff8c00', '#9400d3'];
-            return colors[Math.floor(Math.random() * colors.length)];
-        }
-
-
-
-
     </script>
 </body>
 </html>
